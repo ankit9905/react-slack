@@ -34,7 +34,7 @@ class Channels extends React.Component {
             loadedChannels.push(snap.val());
             this.setState({channels:loadedChannels},()=>this.setFirstChannel())
             this.addNotificationListener(snap.key);
-        })
+        });
     }
 
     addNotificationListener = channelId =>{
@@ -44,7 +44,7 @@ class Channels extends React.Component {
             }
         })
     }
-
+  
     handleNotifications = (channelId,currentChannelId,notifications,snap) =>{
        let lastTotal = 0;
 
@@ -54,16 +54,16 @@ class Channels extends React.Component {
           if(channelId !== currentChannelId){
               lastTotal = notifications[index].total
 
-              if(snap.numChildren() - lastTotal >0){
+              if(snap.numChildren() - lastTotal > 0){
                   notifications[index].count = snap.numChildren() - lastTotal;
               }
-          }
+          } 
           notifications[index].lastKnownTotal = snap.numChildren()
-       }else{
+        }else{
            notifications.push({
                id:channelId,
-               total : snap.numChildren(),
-               lastKnownTotal : snap.numChildren(),
+               total:snap.numChildren(),
+               lastKnownTotal:snap.numChildren(),
                count:0
            })
        }
